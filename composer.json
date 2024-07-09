@@ -1,0 +1,58 @@
+{
+    "name": "eliosfund/repcard-php-sdk",
+    "description": "RepCard SDK for Laravel.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kyle Anderson",
+            "email": "kanderson@eliosfund.com"
+        }
+    ],
+    "homepage": "https://github.com/eliosfund/repcard-php-sdk",
+    "require": {
+        "php": ">=8.2",
+        "illuminate/support": "^10.0"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^7.8",
+        "larastan/larastan": "^2.9",
+        "laravel/pint": "^1.16",
+        "orchestra/testbench": "^8.23",
+        "phpunit/phpunit": "^9.6"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "RepCard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RepCard\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RepCard\\RepCardServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "analyze": "vendor/bin/phpstan analyse --memory-limit=2G",
+        "artisan": "vendor/bin/testbench",
+        "cs-fix": "vendor/bin/pint",
+        "test": "vendor/bin/phpunit",
+        "test-filter": "vendor/bin/phpunit --filter",
+        "test-suite": [
+            "@analyze",
+            "@test"
+        ],
+        "tf": "@test-filter",
+        "ts": "@test-suite"
+    }
+}

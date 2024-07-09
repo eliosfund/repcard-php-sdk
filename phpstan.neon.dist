@@ -1,0 +1,11 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+parameters:
+    paths:
+        - config
+        - src
+        - tests
+    level: 5
+    checkMissingIterableValueType: true
+    checkModelProperties: true
+    reportUnmatchedIgnoredErrors: true
