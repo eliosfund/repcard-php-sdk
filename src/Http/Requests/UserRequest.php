@@ -40,7 +40,7 @@ class UserRequest extends ApiRequest
     public function prepareForValidation(): void
     {
         $this->merge([
-            'phoneNumber' => preg_replace('/\d/', '', $this->phoneNumber),
+            'phoneNumber' => preg_replace('/\D/', '', $this->phoneNumber),
             'countryCode' => Str::start($this->countryCode, '+'),
         ]);
     }
