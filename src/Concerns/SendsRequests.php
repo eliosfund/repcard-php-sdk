@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace RepCard\Concerns;
 
-use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use RepCard\RepCardService;
 
@@ -15,10 +14,12 @@ use RepCard\RepCardService;
  */
 trait SendsRequests
 {
-    public function __construct(
-        protected PendingRequest $client,
-        protected int $companyId,
-    ) {}
+    protected int $companyId;
+
+    public function __construct()
+    {
+        $this->companyId = config('repcard.company_id');
+    }
 
     /**
      * Issue a `GET` request to the given path.
