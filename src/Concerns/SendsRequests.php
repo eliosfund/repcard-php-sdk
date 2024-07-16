@@ -70,7 +70,7 @@ trait SendsRequests
     /**
      * Issue a `GET` request to the given path.
      */
-    public function get(string $path, ?array $query = null): Response
+    public function get(string $path, array|null|string $query = null): Response
     {
         return $this->client()->get($path, $query);
     }
