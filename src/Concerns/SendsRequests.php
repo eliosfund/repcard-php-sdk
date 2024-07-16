@@ -25,6 +25,23 @@ trait SendsRequests
         $this->companyId = config('repcard.company_id');
     }
 
+    public function buildUrl(string $path, ?array $query = null): string
+    {
+        $url = $this->baseUri();
+
+        $url = $url->withPath(
+            path: $url->getPath().Str::start($path, '/')
+        );
+
+        if ($query !== null) {
+            $url = $url->withQuery(
+                query: http_build_query($query)
+            );
+        }
+
+        return (string) $url;
+    }
+
     public function baseUri(): Uri
     {
         return (new Uri())->withScheme(
