@@ -49,6 +49,8 @@ trait Users
 
     public function unlinkUser(int $userId): Response
     {
-        return $this->post("users/$userId/unlink");
+        return $this->post("users/$userId/unlink", [
+            'assignContact' => 1,
+        ]);
     }
 }
