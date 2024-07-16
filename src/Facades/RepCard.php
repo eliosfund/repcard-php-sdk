@@ -27,7 +27,10 @@ use RepCard\RepCardService;
  * @method static \Illuminate\Http\Client\Response createUser(\RepCard\Http\Requests\UserRequest $request)
  * @method static \Illuminate\Http\Client\Response updateUser(int $userId, \RepCard\Http\Requests\UserRequest $request)
  * @method static \Illuminate\Http\Client\Response unlinkUser(int $userId)
- * @method static \Illuminate\Http\Client\Response get(string $path, array|null $query = null)
+ * @method static string buildUrl(string $path, array|null $query = null)
+ * @method static \GuzzleHttp\Psr7\Uri baseUri()
+ * @method static \Illuminate\Http\Client\PendingRequest client()
+ * @method static \Illuminate\Http\Client\Response get(string $path, array|string|null $query = null)
  * @method static \Illuminate\Http\Client\Response post(string $path, array $data = [])
  * @method static \Illuminate\Http\Client\Response put(string $path, array $data = [])
  *
