@@ -38,7 +38,7 @@ use RepCard\RepCardService;
 class RepCard extends Facade
 {
     public static function fake(
-        string $path,
+        string $path = '*',
         ?array $query = null,
         array|null|string $body = null,
         int $status = Response::HTTP_OK
