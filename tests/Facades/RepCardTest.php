@@ -24,6 +24,55 @@ class RepCardTest extends TestCase
         ];
     }
 
+    public function test_it_can_fake_a_response(): void
+    {
+        RepCard::fake();
+
+        $this->assertOk(RepCard::get('/'));
+    }
+
+    public function test_it_can_build_a_url(): void
+    {
+        $url = RepCard::buildUrl('/test');
+
+        $this->assertSame('https://app.repcard.com/api/test', $url);
+    }
+
+    public function test_it_can_build_a_url_with_query(): void
+    {
+        $url = RepCard::buildUrl('/test', [
+            'foo' => 'bar',
+        ]);
+
+        $this->assertSame('https://app.repcard.com/api/test?foo=bar', $url);
+    }
+
+    public function test_it_can_get_the_base_uri(): void
+    {
+        $uri = RepCard::baseUri();
+
+        $this->assertSame('https', $uri->getScheme());
+        $this->assertSame('app.repcard.com', $uri->getHost());
+        $this->assertSame('/api', $uri->getPath());
+    }
+
+    public function test_it_can_get_the_client(): void
+    {
+        $expected = [
+            'connect_timeout' => config('repcard.connect_timeout'),
+            'http_errors' => false,
+            'timeout' => config('repcard.timeout'),
+            'headers' => [
+                'Accept' => 'application/json',
+                'x-api-key' => config('repcard.key'),
+            ],
+        ];
+
+        $options = RepCard::client()->getOptions();
+
+        $this->assertSame($expected, $options);
+    }
+
     public function test_get_companies(): void
     {
         RepCard::fake('/companies');
