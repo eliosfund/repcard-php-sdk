@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace RepCard\Facades;
 
-use GuzzleHttp\Psr7\Uri;
 use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 use RepCard\RepCardService;
 
 /**
@@ -38,30 +37,19 @@ use RepCard\RepCardService;
  */
 class RepCard extends Facade
 {
-    public static function fake(string $path, ?array $query = null): Factory
-    {
-        $instance = new Factory();
+    public static function fake(
+        string $path,
+        ?array $query = null,
+        array|null|string $body = null,
+        int $status = Response::HTTP_OK
+    ): Factory {
+        /** @var RepCardService $instance */
+        $instance = static::getFacadeRoot();
 
-        Http::swap($instance);
+        $url = $instance->buildUrl($path, $query);
 
-        $url = (new Uri())->withScheme(
-            scheme: 'https'
-        )->withHost(
-            host: config('repcard.fqdn')
-        )->withPath(
-            path: config('repcard.endpoint').Str::start($path, '/')
-        );
-
-        if ($query !== null) {
-            $url = $url->withQuery(
-                query: http_build_query($query)
-            );
-        }
-
-        $url = (string) $url;
-
-        return $instance->fake([
-            $url => Http::response(),
+        return Http::fake([
+            $url => Http::response($body, $status),
         ]);
     }
 
