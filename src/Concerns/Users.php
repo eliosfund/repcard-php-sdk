@@ -15,11 +15,15 @@ use RepCard\RepCardService;
  */
 trait Users
 {
-    public function getUsers(?int $companyId = null, int $perPage = 30): Response
-    {
+    public function getUsers(
+        ?int $companyId = null,
+        int $perPage = 30,
+        int $page = 1
+    ): Response {
         return $this->get('users/minimal', [
             'company_id' => $companyId ?? $this->companyId,
             'per_page' => $perPage,
+            'page' => $page,
         ]);
     }
 
