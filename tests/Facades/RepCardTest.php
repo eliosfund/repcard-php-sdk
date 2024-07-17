@@ -207,7 +207,7 @@ class RepCardTest extends TestCase
 
         RepCard::fake('/users/minimal', $query = [
             'company_id' => $companyId,
-            'per_page' => 30,
+            'per_page' => 100,
             'page' => 1,
         ]);
 

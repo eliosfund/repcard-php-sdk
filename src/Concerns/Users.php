@@ -17,7 +17,7 @@ trait Users
 {
     public function getUsers(
         ?int $companyId = null,
-        int $perPage = 30,
+        int $perPage = 100,
         int $page = 1
     ): Response {
         return $this->get('users/minimal', [
