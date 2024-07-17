@@ -20,7 +20,7 @@ use RepCard\RepCardService;
  * @method static \Illuminate\Http\Client\Response getLeaderboards(\DateTimeInterface|string|null $from = null, \DateTimeInterface|string|null $to = null)
  * @method static \Illuminate\Http\Client\Response getOffices(string|null $search = null)
  * @method static \Illuminate\Http\Client\Response getOfficeTeams(int $officeId)
- * @method static \Illuminate\Http\Client\Response getUsers(int|null $companyId = null, int $perPage = 30, int $page = 1)
+ * @method static \Illuminate\Http\Client\Response getUsers(int|null $companyId = null, int $perPage = 100, int $page = 1)
  * @method static \Illuminate\Http\Client\Response getUser(int $userId)
  * @method static \Illuminate\Http\Client\Response getEventUser(int $userId)
  * @method static \Illuminate\Http\Client\Response createUser(\RepCard\Http\Requests\UserRequest $request)
