@@ -18,10 +18,11 @@ use RepCard\RepCardService;
  */
 trait Customers
 {
-    public function getCustomers(int $perPage = 100): Response
+    public function getCustomers(int $perPage = 100, int $page = 1): Response
     {
         return $this->get('customers', [
             'per_page' => $perPage,
+            'page' => $page,
         ]);
     }
 
@@ -30,10 +31,14 @@ trait Customers
         return $this->get("customers/$customerId");
     }
 
-    public function getCustomerAttachments(int $customerId, int $perPage = 50): Response
-    {
+    public function getCustomerAttachments(
+        int $customerId,
+        int $perPage = 50,
+        int $page = 1
+    ): Response {
         return $this->get("customers/$customerId/attachments", [
             'per_page' => $perPage,
+            'page' => $page,
         ]);
     }
 

@@ -82,10 +82,9 @@ class RepCardTest extends TestCase
 
     public function test_get_customers(): void
     {
-        $perPage = 100;
-
         RepCard::fake('/customers', [
-            'per_page' => $perPage,
+            'per_page' => 100,
+            'page' => 1,
         ]);
 
         $this->assertOk(RepCard::getCustomers());
@@ -105,15 +104,14 @@ class RepCardTest extends TestCase
     public function test_get_customer_attachments(): void
     {
         $customerId = 1;
-        $perPage = 50;
 
         RepCard::fake("/customers/$customerId/attachments", [
-            'per_page' => $perPage,
+            'per_page' => 50,
+            'page' => 1,
         ]);
 
         $this->assertOk(RepCard::getCustomerAttachments(
-            customerId: $customerId,
-            perPage: $perPage
+            customerId: $customerId
         ));
     }
 
@@ -206,19 +204,16 @@ class RepCardTest extends TestCase
     public function test_get_users(): void
     {
         $companyId = config('repcard.company_id');
-        $perPage = 30;
 
-        RepCard::fake('/users/minimal', [
+        RepCard::fake('/users/minimal', $query = [
             'company_id' => $companyId,
-            'per_page' => $perPage,
+            'per_page' => 30,
+            'page' => 1,
         ]);
 
         $this->assertOk(RepCard::getUsers());
 
-        RepCard::fake('/users/minimal', [
-            'company_id' => $companyId,
-            'per_page' => $perPage,
-        ]);
+        RepCard::fake('/users/minimal', $query);
 
         $this->assertOk(RepCard::getUsers(
             companyId: $companyId
