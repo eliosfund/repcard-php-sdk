@@ -35,7 +35,7 @@ trait SendsRequests
 
         if ($query !== null) {
             $url = $url->withQuery(
-                query: http_build_query($query)
+                query: http_build_query($query, encoding_type: PHP_QUERY_RFC3986),
             );
         }
 
