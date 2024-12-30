@@ -7,14 +7,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  Facades:
+  facades:
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     steps:
-      - name: Checkout code
+      - name: Checkout Source
         uses: actions/checkout@v4
 
       - name: Setup PHP
@@ -25,17 +25,17 @@ jobs:
           tools: composer:v2
           coverage: none
 
-      - name: Install dependencies
+      - name: Install Composer Dependencies
         run: |
           composer config repositories.facade-documenter vcs git@github.com:laravel/facade-documenter.git
           composer require --dev laravel/facade-documenter:dev-main --no-interaction --no-progress --prefer-dist --prefer-stable
 
-      - name: Update facades
+      - name: Update Facades
         run: |
           php -f vendor/bin/facade.php -- \
-            RepCard\\Facades\\RepCard
+            Scanifly\\Facades\\Scanifly
 
-      - name: Commit changes
+      - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Update docblocks
