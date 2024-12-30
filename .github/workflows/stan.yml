@@ -1,11 +1,11 @@
-name: Code Style
+name: Type Coverage
 
 on:
   pull_request:
 
 jobs:
-  lint:
-    name: Check Code Style
+  phpstan:
+    name: Run Static Analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
@@ -21,5 +21,5 @@ jobs:
       - name: Install Composer Dependencies
         run: composer update --prefer-stable --prefer-dist --no-interaction --no-progress
 
-      - name: Run Linter
-        run: vendor/bin/pint --test
+      - name: Run Static Analysis
+        run: vendor/bin/phpstan analyse --memory-limit=2G
