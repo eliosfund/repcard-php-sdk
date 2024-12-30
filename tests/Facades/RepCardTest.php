@@ -60,6 +60,7 @@ class RepCardTest extends TestCase
     {
         $expected = [
             'connect_timeout' => config('repcard.connect_timeout'),
+            'crypto_method' => STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT,
             'http_errors' => false,
             'timeout' => config('repcard.timeout'),
             'headers' => [
